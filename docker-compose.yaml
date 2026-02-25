@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: task-nest-postgresql
+    ports:
+      - "5433:5433"
+    environment:
+      POSTGRES_USER: tasknest
+      POSTGRES_PASSWORD: tasknest_secret
+      POSTGRES_DB: tasknest
+      PGPORT: 5433
