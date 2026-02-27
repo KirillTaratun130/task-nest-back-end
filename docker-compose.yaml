@@ -9,3 +9,20 @@ services:
       POSTGRES_PASSWORD: tasknest_secret
       POSTGRES_DB: tasknest
       PGPORT: 5433
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: task-nest-backend
+    ports:
+      - "4200:4200"
+    environment:
+      DATABASE_URL: "postgresql://tasknest:tasknest_secret@postgres:5433/tasknest"
+      JWT_SECRET: "D*IRNF(@#*)"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  pgdata:
